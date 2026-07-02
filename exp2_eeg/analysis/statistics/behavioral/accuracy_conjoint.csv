@@ -1,0 +1,14 @@
+Emoji,Questions,n,n_correct,accuracy
+👠,A mensagem especifica que ela vai vestir roupas chiques?,10,3,0.3
+🧻,O autor dá motivos para não conseguir sair?,9,5,0.5555555555555556
+👫,"Segundo a mensagem, eles foram à galeria de casal?",9,6,0.6666666666666666
+🌧️,A internet foi interrompida sem razão aparente na mensagem?,10,8,0.8
+🛹,"Segundo a mensagem, o escorregão envolveu a prática de esportes?",10,8,0.8
+☔,"Segundo a mensagem, o evento foi cancelado por causa da chuva?",9,8,0.8888888888888888
+⚽,A mensagem diz que o Brasil foi derrotado num jogo de futebol?,10,9,0.9
+🎻,O autor diz admirar as habilidades musicais do homem?,10,9,0.9
+🎸,"Segundo a mensagem, o autor foi despertado por música alta?",10,10,1
+🔫,"Segundo a mensagem, eles entraram armados?",10,10,1
+🚘,A mensagem diz que ele não vai beber porque não gosta?,10,10,1
+🤥,A mensagem mostra que a história era falsa?,9,9,1
+🤰,"Na mensagem, a novidade é um carro novo?",10,10,1

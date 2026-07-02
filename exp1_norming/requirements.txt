@@ -1,0 +1,9 @@
+# Python dependencies for the exp1_norming list-generation script (create_lists.py).
+#
+# The script uses only standard, version-agnostic features (no walrus, no
+# match-statement, no pandas-3-only API), so it runs on a wide range of versions.
+# The pins below are the versions it was verified to run with.
+#
+# Python 3.13.12
+pandas==3.0.2
+openpyxl==3.1.5

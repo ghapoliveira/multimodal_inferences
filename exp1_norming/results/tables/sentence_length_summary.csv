@@ -1,0 +1,5 @@
+set,measure,min,max,mean,sd,median
+full,words,3,6,4.43,0.63,4
+full,characters,22,25,23.49,1.08,23.5
+selected,words,3,6,4.42,0.57,4
+selected,characters,22,25,23.54,1.07,24

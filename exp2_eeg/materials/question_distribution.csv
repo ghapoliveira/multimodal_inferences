@@ -1,0 +1,8 @@
+Condition,List 1,List 2,List 3,Total
+A,11 (9 No / 2 Yes),9 (7 No / 2 Yes),11 (8 No / 3 Yes),31
+B,8 (3 No / 5 Yes),12 (8 No / 4 Yes),11 (3 No / 8 Yes),31
+C,12 (10 No / 2 Yes),10 (6 No / 4 Yes),9 (8 No / 1 Yes),31
+FILLER,30 (10 No / 20 Yes),30 (10 No / 20 Yes),30 (10 No / 20 Yes),30
+Fillers,30,30,30,90
+Condition questions,31,31,31,93
+Total questions,61,61,61,183

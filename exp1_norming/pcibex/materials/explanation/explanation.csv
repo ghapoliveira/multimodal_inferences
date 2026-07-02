@@ -1,0 +1,10 @@
+label,htmlFile,backTarget,continueText
+explain1,explain1.html,NA,Clique aqui para continuar.
+explain2,explain2.html,explain1,Continuar
+explain3_1,explain3_1.html,explain2,Continuar
+explain3_2,explain3_2.html,explain3_1,Continuar
+explain4,explain4.html,explain3_2,Continuar
+explain5_1,explain5_1.html,explain4,Continuar
+explain5_2,explain5_2.html,explain5_1,Continuar
+explain6,explain6.html,explain5_2,Continuar
+explain_final,explain_final.html,explain6,Continuar

@@ -1,0 +1,15 @@
+body {
+  font-size: 15px;
+}
+
+.PC_button { 
+    font-family: "Times New Roman", Times, serif !important;
+    font-size: 1.1em !important;
+}
+
+select, input[type="text"] {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 15px;
+}
+
+

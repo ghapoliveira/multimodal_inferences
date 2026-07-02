@@ -1,0 +1,13 @@
+# R 4.5.3
+dplyr==1.2.1
+emmeans==2.0.3
+ggplot2==4.0.3
+lmerTest==3.2.1
+lme4==2.0.1
+ordinal==2025.12.29
+readr==2.2.0
+readxl==1.4.5
+stringr==1.6.0
+tidyr==1.3.2
+ucminf==1.2.3
+writexl==1.5.4

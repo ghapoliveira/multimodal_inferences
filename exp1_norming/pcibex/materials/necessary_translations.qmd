@@ -1,0 +1,101 @@
+**Emoji familiarity (infomation screen)**
+
+I use and receive them daily; I use and receive them a few times a week; I use and receive them sometimes; I rarely or never use them, but I receive them daily; I rarely or never use them, but I receive them a few times a week; I rarely or never use them, but I receive them sometimes; I never receive nor use them.
+
+**(explain1.html)**
+
+Welcome!
+
+In this experiment, you will see sentences followed by emojis and you must provide judgments regarding the text-image relationship.
+
+Follow the instructions carefully. During this stage, you may freely go back and forth through the slides.
+
+**(explain2.html)**
+
+For each sentence-emoji combination, you will have to answer, on a scale of 1 to 7, to what extent:
+
+a) the emoji is visually identifiable;
+b) the emoji and the sentence make sense together;
+c) the emoji adds information to the sentence.
+
+**(explain3_1.html)**
+
+a\) To what extent is the emoji visually identifiable?
+
+By "visually identifiable", we refer to the fact that some emojis have a clearer design than others. For example:
+
+![](apple.png){fig-align="center"}
+
+The emoji above depicts an apple in a reasonably typical way. Most people, therefore, would quickly recognize an apple and rate it 7 (perfectly identifiable) or close to 7 in this regard.
+
+**(explain3_2.html)**
+
+a\) To what extent is the emoji visually identifiable?
+
+![](worm.png){fig-align="center"}
+
+Here, on the other hand, some people might indeed see a worm and give high scores (7 or close to it), but a good portion would probably be unsure about what is being depicted (a worm? a snake? a tail?) and would rate it a 1 (impossible to identify) or close to it.
+
+**(explain4.html)**
+
+b\) To what extent do the emoji and the sentence make sense together?
+
+By the sentence and emoji "making sense together", we mean that some sentence-emoji pairs will make more sense than others for each participant.
+
+If you think that the emoji and the sentence, interpreted together, make no sense at all, you should rate it a 1 or close to a 1. On the other hand, if you think the sentence and the emoji make perfect sense together, you should rate it a 7 or close to a 7.
+
+**(explain5_1.html)**
+
+c\) To what extent does the emoji add information to the sentence?
+
+Finally, by "adding information," we mean that the emoji can be redundant regarding the message or add some contextual element to it.
+
+![I took my car to the mechanic\*](mechanic.png){fig-align="center"}
+
+Above, for example, there seems to be a certain repetition. The emoji at the end, portraying a tool, appears only to refer back to the context established by "mechanic". If you think the same, here you would rate it a 1 (adds no information) or close to a 1.
+
+**(explain5_2.html)**
+
+c\) To what extent does the emoji add information to the sentence?
+
+![I cheered a lot for him today\*](race.png){fig-align="center"}
+
+A different case occurs here. Many would see a connection between the car at the end and the event where the "cheering" takes place. Without the emoji, the sentence would not have this information. It would be a situation where the emoji adds a lot of information or even essential information for understanding the sentence. If you see this connection, here you would rate it a 7 or close to a 7.
+
+**(explain6.html)**
+
+The important thing, in all cases, is not to overthink. Answer according to what comes to mind first, without trying to construct complex scenarios. 
+
+The explanations provided mostly indicate the extremes of each category. 
+
+At times you might prefer to use the intermediate numbers. 
+
+There is no right or wrong answer. We are interested in your individual judgment.
+
+**(explain_final.html)**
+
+Now that you've read the instructions, shall we do a practice round?
+
+**(training1)**
+I've left the door open 🚪
+
+**(training_unused)** - Ultimately this one was not added.
+I cheered a lot for him today 🪱
+
+**(training3)**
+I didn't finish the project 🧶
+
+**(start.html)**
+Ok! Now that you've completed the training, let's begin the experiment.
+
+Remember to proceed without overthinking; however, do the task carefully - your answers are very important to us!
+
+Please, when you begin, remain focused until the end of the task. The experiment lasts around 15 minutes. There will be a break in the middle. The data is only saved at the end.
+
+**
+
+**(break)**
+You've completed the first half of the experiment. Take a break if you want and click Continue to proceed.
+
+**(final)**
+Thank you for participating! Your answers were recorded.

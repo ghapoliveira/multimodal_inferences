@@ -1,0 +1,153 @@
+h1 {
+  text-align: center;
+  margin-bottom: 1em;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+body {
+    color: black;
+    background-color: white;
+    padding: 0;
+    margin: 2em 0;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1em;
+}
+
+.PennController-PennController button,
+.PennController-PennController input,
+.PennController-PennController select,
+.PennController-PennController textarea {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+
+img {
+    width: 90vw;
+    max-width: 700px;
+    display: block;
+    margin: 0 auto 0 auto;
+}
+
+.PennController-Scale {
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr) !important;
+    width: 90vw !important;           
+    max-width: 700px !important;      
+    margin: 0 auto 1em auto !important;     
+    justify-items: center !important;
+}
+
+.PennController-Scale .option {
+    width: auto !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.PennController-Scale .option label {
+    white-space: normal !important;
+    font-size:0.90em;
+    text-align: center !important;
+    display: block !important; 
+    margin-top: 0 !important;
+    line-height: 1.2 !important;
+}
+
+.PennController-Scale .option input[type="radio"] {
+    margin-bottom: 0.25em !important;
+}
+
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+    body {
+        margin-top: 0;
+    }
+}
+
+.lindent { margin-left: 5em; }
+.sending-results {
+    font-weight: bold;
+    font-size: medium;
+}
+div.bar-container {
+    border: 1px solid;
+    border-color: #9ea4b1;
+    background-color: white;
+}
+div.bar {
+    background-color: blue;
+}
+p.progress-text {
+    padding-top: 0.5em;
+    margin-top: 0;
+    margin-bottom: 2em;
+    font-style: italic;
+    font-size: small;
+}
+p.practice-box {
+    color: blue;
+    height: 1.5em;
+    padding-bottom: 1em;
+    font-size: small;
+    text-align: center;
+}
+span.retry {
+    color: blue;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+span.retry:hover {
+    text-decoration: underline;
+}
+span.retry:visited {
+    color: blue;
+}
+
+/* Controla a centralização vertical: se o participante abrir no computador ou no tablet, 
+ou se abrir no modo paisagem, tudo é centralizado no meio da página (exceto "consent" e "info")*/
+
+@media screen and (hover: hover) and (pointer: fine), 
+       screen and (orientation: landscape) {
+
+    body#bod {
+        margin: 0 !important;
+        overflow-x: hidden !important; 
+        overflow-y: hidden !important; 
+        box-sizing: border-box;
+    }
+
+    p.PennController-PennController {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important; 
+        align-items: center !important;      
+        min-height: 100vh !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 0 !important;                
+        margin: 0 !important;                
+    }
+
+    /* Consent e info */
+    p.PennController-PennController:has(div.PennController-consent-container),
+    p.PennController-PennController:has(div.PennController-inputAge-container) {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;  
+        align-items: center !important;         
+        min-height: auto !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    body#bod:has(div.PennController-consent-container),
+    body#bod:has(div.PennController-inputAge-container) {
+        margin-top: 2em !important; 
+        margin-bottom: 2em !important;
+        overflow-y: auto !important;
+    }
+}

@@ -1,0 +1,14 @@
+mne==1.11.0
+mne-bids==0.18.0
+mne-nirs==0.7.3
+mne-qt-browser==0.7.4
+mnelab==1.0.8
+matplotlib==3.10.8
+matplotlib-inline==0.2.1
+pathlib==1.0.1
+numpy==2.4.3
+pandas==3.0.1
+autoreject==0.4.3
+ipython==9.12.0
+papermill==2.7.0
+natsort==8.4.0

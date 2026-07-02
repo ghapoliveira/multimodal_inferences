@@ -1,0 +1,124 @@
+Sentence,Emoji,Condition,n,n_correct,accuracy
+A mulher quase desmaiou,💉,b,10,10,1
+A mulher quase desmaiou,😵‍💫,a,9,9,1
+A água estava cristalina,💎,a,10,10,1
+A água estava cristalina,🤿,b,10,10,1
+A água estava cristalina,🪈,c,9,9,1
+Ela dorme de luz acesa,👹,b,10,10,1
+Ela dorme de luz acesa,💡,a,9,9,1
+Ela está indo se vestir,🐐,c,9,9,1
+Ela está indo se vestir,🚶‍♀️‍➡️,a,10,10,1
+Ela foi aplaudida de pé,⚓,c,10,10,1
+Ela foi aplaudida de pé,👏,a,9,9,1
+Ela viu um 🦄 no desenho,🦄,filler,29,29,1
+Ele caminhou pela cidade,🍪,c,10,10,1
+Ele caminhou pela cidade,🗽,b,10,10,1
+Ele caminhou pela cidade,🚶,a,9,9,1
+Ele contou uma história,🍋,c,10,10,1
+Ele contou uma história,💬,a,10,10,1
+Ele contou uma história,🤥,b,9,9,1
+Ele escorregou da escada,🧨,c,9,9,1
+Ele escorregou da escada,🪜,a,10,10,1
+Ele não vai beber hoje,🐦‍⬛,c,9,9,1
+Ele não vai beber hoje,🚘,b,10,10,1
+Eles entraram no mercado,🏪,a,9,9,1
+Eles entraram no mercado,📡,c,10,10,1
+Eles entraram no mercado,🔫,b,10,10,1
+Eles fizeram o exame à ✏️,✏️,filler,29,29,1
+Esse restaurante é famoso,🍣,b,10,10,1
+Esse restaurante é famoso,🍴,a,10,10,1
+Esse restaurante é famoso,🎾,c,9,9,1
+Eu admiro aquele homem,🥪,c,10,10,1
+Eu admiro aquele homem,🧍‍♂,a,9,9,1
+Eu adoro festas típicas,🚰,c,9,9,1
+Eu adoro festas típicas,🥳,a,10,10,1
+Eu cortei o pão com a 🔪,🔪,filler,29,29,1
+Eu estava suando bastante,💦,a,10,10,1
+Eu fiz a barba com a 🪒,🪒,filler,29,29,1
+Eu gosto de 🍉 no verão,🍉,filler,29,29,1
+Eu preciso comprar roupas,🖨️,c,10,10,1
+Eu preciso comprar roupas,🛍️,a,9,9,1
+Eu preciso comprar roupas,🧣,b,10,10,1
+Eu quase morri de susto,🕷️,b,9,9,1
+Eu quase morri de susto,😱,a,10,10,1
+Eu quase morri de susto,🥋,c,10,10,1
+Eu tenho pavor de mato,🌱,a,9,9,1
+Eu 🤮 a madrugada inteira,🤮,filler,29,29,1
+Fomos à galeria de arte,🎨,a,10,10,1
+Meu cachorro se machucou,🐍,b,10,10,1
+Meu cachorro se machucou,🐕,a,9,9,1
+Meu cachorro se machucou,🧞‍♂️,c,10,10,1
+Meu colesterol está alto,⬆️,a,9,9,1
+Meu colesterol está alto,🍔,b,10,10,1
+Nós temos uma novidade,🍥,c,10,10,1
+Nós temos uma novidade,🗣️,a,9,9,1
+Nós temos uma novidade,🤰,b,10,10,1
+O evento foi cancelado,❌,a,10,10,1
+O evento foi cancelado,🪐,c,10,10,1
+O menino quebrou o dente,🥻,c,9,9,1
+O menino quebrou o dente,🦷,a,10,10,1
+O nosso avião se atrasou,🌨️,b,9,9,1
+O som alto me despertou,🎸,b,10,10,1
+O vento está bom agora,🍃,a,10,10,1
+O vento está bom agora,🐘,c,10,10,1
+O vento está bom agora,🪁,b,9,9,1
+O 🌡️ está marcando febre,🌡️,filler,29,29,1
+O 🚕 demorou para chegar,🚕,filler,29,29,1
+O 🚛 bloqueou o trânsito,🚛,filler,29,29,1
+Os ingleses gostam de 🍵,🍵,filler,29,29,1
+Os 🧑‍🚀 pisaram na lua,🧑‍🚀,filler,29,29,1
+Presenteei vários amigos,☁️,c,9,9,1
+Presenteei vários amigos,🎅,b,10,10,1
+Presenteei vários amigos,🫂,a,10,10,1
+Tem uma mancha na blusa,🍷,b,9,9,1
+Tem uma mancha na blusa,👕,a,10,10,1
+Tem uma mancha na blusa,📹,c,10,10,1
+A 🍐 estava muito madura,🍐,filler,29,28,0.9655172413793104
+A 🕯️ apagou com o vento,🕯️,filler,29,28,0.9655172413793104
+Ela pôs um🪮 no cabelo,🪮,filler,29,28,0.9655172413793104
+Ela tocou 🎺 na orquestra,🎺,filler,29,28,0.9655172413793104
+Eu acho chique usar 👒,👒,filler,29,28,0.9655172413793104
+Meu🪞 é pequeno demais,🪞,filler,29,28,0.9655172413793104
+Nós tivemos que usar a 🔦,🔦,filler,29,28,0.9655172413793104
+O banco me mandou uma ✉️,✉️,filler,29,28,0.9655172413793104
+O 🌵 vive dias sem água,🌵,filler,29,28,0.9655172413793104
+O 📻 só passa música ruim,📻,filler,29,28,0.9655172413793104
+O 🥷 foi muito sorrateiro,🥷,filler,29,28,0.9655172413793104
+A 🐜 carregou a folhinha,🐜,filler,29,27,0.9310344827586207
+Adoram beber 🧉 no Sul,🧉,filler,29,27,0.9310344827586207
+Coloquei 🥫 no macarrão,🥫,filler,29,27,0.9310344827586207
+Gosto de botar gelo no 🥃,🥃,filler,29,27,0.9310344827586207
+O 🏺 tem mais de mil anos,🏺,filler,29,27,0.9310344827586207
+A mulher quase desmaiou,🦜,c,10,9,0.9
+Ela dorme de luz acesa,🪕,c,10,9,0.9
+Ela foi aplaudida de pé,🎹,b,10,9,0.9
+Ele não vai beber hoje,🍸,a,10,9,0.9
+Eu admiro aquele homem,🎻,b,10,9,0.9
+Eu adoro festas típicas,🌽,b,10,9,0.9
+Eu estava suando bastante,🏇,b,10,9,0.9
+Eu não consigo sair agora,🙅‍♂️,a,10,9,0.9
+Eu não consigo sair agora,🥛,c,10,9,0.9
+Eu tenho pavor de mato,🕌,c,10,9,0.9
+Eu tenho pavor de mato,🪲,b,10,9,0.9
+Fomos à galeria de arte,🔔,c,10,9,0.9
+Meu colesterol está alto,🫏,c,10,9,0.9
+O Brasil foi derrotado,⚽,b,10,9,0.9
+O menino quebrou o dente,🍭,b,10,9,0.9
+O nosso avião se atrasou,✈️,a,10,9,0.9
+O nosso avião se atrasou,🥼,c,10,9,0.9
+Ele perdeu a 🧤 na rua,🧤,filler,29,26,0.896551724137931
+Eu estava suando bastante,🌾,c,9,8,0.8888888888888888
+O evento foi cancelado,☔,b,9,8,0.8888888888888888
+Ela usou o 🌂 na chuva,🌂,filler,29,25,0.8620689655172413
+Ele escorregou da escada,🛹,b,10,8,0.8
+Nós estamos sem internet,🌧️,b,10,8,0.8
+Fomos à galeria de arte,👫,b,9,6,0.6666666666666666
+Nós estamos sem internet,🩴,c,9,6,0.6666666666666666
+O Brasil foi derrotado,🍒,c,9,6,0.6666666666666666
+Ela adora 📚 de mistério,📚,filler,29,19,0.6551724137931034
+Nós estamos sem internet,🛜,a,10,6,0.6
+O Brasil foi derrotado,🇧🇷,a,10,6,0.6
+Eu não consigo sair agora,🧻,b,9,5,0.5555555555555556
+O som alto me despertou,🌏,c,9,3,0.3333333333333333
+Ela está indo se vestir,👠,b,10,3,0.3
+O som alto me despertou,🔊,a,10,1,0.1
