@@ -40,7 +40,7 @@ This repository includes the group-level results and materials for both experime
 
 ## Citation
 
-> Pimentel de Oliveira, G. H. A. (2026). *Emojis and inferential processes: the neurophysiology of bridging in multimodal settings* \[Master's dissertation, Universidade Federal do Rio de Janeiro\]. Advisor: Profa. Dra. Marije Soto.
+> Pimentel de Oliveira, G. H. A. (2026). *Emojis and inferential processes: the neurophysiology of bridging in multimodal settings* \[Master's dissertation, Universidade Federal do Rio de Janeiro\]. Advisor: Prof. Dr. Marije Soto.
 
 ## Credits
 
