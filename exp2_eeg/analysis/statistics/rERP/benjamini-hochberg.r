@@ -14,7 +14,7 @@ bh_apply_wide <- function(
         elec,
         alpha=0.05,
         # Adapted to our windows of interest
-        tws = list(c(250, 350), c(300, 500), c(500, 1000))) {
+        tws = list(c(250, 300), c(300, 500), c(500, 1000))) {
         
         preds <- unique(data$Spec)
         keep_ts <- c()

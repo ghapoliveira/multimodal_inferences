@@ -11,6 +11,11 @@ library(data.table)
 library(ggplot2)
 library(grid)
 library(gridExtra)
+library(extrafont)
+
+loadfonts(device = "pdf")
+
+theme_set(theme_get() + theme(text = element_text(family = "Times New Roman")))
 
 # 1: Coordinate preparation
 prepare_loc_from_ced <- function(input_file, output_file = "standard_30_clean.loc") {
@@ -40,10 +45,10 @@ make_plots_emojis <- function(
   dir.create(paste0(out_file, "_plots/Waveforms"), showWarnings = FALSE)
   dir.create(paste0(out_file, "_plots/Topoplots"), showWarnings = FALSE)
 
-  clean_predictors <- c("Intercept", "Meaning", "Info", "VError")
-  model_labs <- c("Intercept", "Meaning", "Info", "VError")
+  clean_predictors <- c("Intercept", "Coherence", "Information Addition", "Visual Clarity")
+  model_labs <- c("Intercept", "Coherence", "Info", "V. Clarity")
   model_vals <- c("black", "#004488", "#BB5566", "#228833")
-  time_windows <- list(c(250, 350), c(300, 500), c(500, 1000))
+  time_windows <- list(c(250, 300), c(300, 500), c(500, 1000))
 
   # Description  (WITHIN file: real between-subjects CIs)
 
@@ -72,14 +77,14 @@ make_plots_emojis <- function(
   # B. Coefficient topoplots
   for (tw in time_windows) {
     plot_topo(data = coef, file = paste0(out_file, "_plots/Topoplots/Topo"),
-              tw = tw, cond_man = "Meaning", cond_base = "Intercept",
-              subtitle = "Meaning coefficient")
+              tw = tw, cond_man = "Coherence", cond_base = "Intercept",
+              subtitle = "Coherence")
     plot_topo(data = coef, file = paste0(out_file, "_plots/Topoplots/Topo"),
-              tw = tw, cond_man = "Info", cond_base = "Intercept",
-              subtitle = "Info coefficient")
+              tw = tw, cond_man = "Information Addition", cond_base = "Intercept",
+              subtitle = "Information Addition")
     plot_topo(data = coef, file = paste0(out_file, "_plots/Topoplots/Topo"),
-              tw = tw, cond_man = "VError", cond_base = "Intercept",
-              subtitle = "VError coefficient")
+              tw = tw, cond_man = "Visual Clarity", cond_base = "Intercept",
+              subtitle = "Visual Clarity")
   }
 
   # INFERENCE  (ACROSS file: pooled t-values / p-values)
@@ -107,10 +112,10 @@ make_plots_emojis <- function(
 
   eeg <- fread(paste0(desc_file, "_data.csv"))
   eeg$Condition <- factor(eeg$Condition, levels = c(1, 2, 3),
-                          labels = c("Cond_A", "Cond_B", "Cond_C"))
+                          labels = c("A (given)", "B (bridged)", "C (new)"))
 
   obs <- eeg[Type == "EEG", ]
-  data_labs <- c("Cond_A", "Cond_B", "Cond_C")
+  data_labs <- c("A (given)", "B (bridged)", "C (new)")
   data_vals <- c("black", "red", "blue")
 
   # D. Observed ERPs
@@ -127,11 +132,11 @@ make_plots_emojis <- function(
   for (tw_idx in time_windows) {
     tw_str <- paste0(tw_idx[1], "-", tw_idx[2])
     plot_topo(obs, file = paste0(out_file, "_plots/Topoplots/Observed"),
-              tw = tw_idx, cond_man = "Cond_B", cond_base = "Cond_A",
+              tw = tw_idx, cond_man = "B (bridged)", cond_base = "A (given)",
               add_title = paste0("\nObserved B-A (", tw_str, " ms)"),
               subtitle = "Observed data")
     plot_topo(obs, file = paste0(out_file, "_plots/Topoplots/Observed"),
-              tw = tw_idx, cond_man = "Cond_C", cond_base = "Cond_A",
+              tw = tw_idx, cond_man = "C (new)", cond_base = "A (given)",
               add_title = paste0("\nObserved C-A (", tw_str, " ms)"),
               subtitle = "Observed data")
   }
@@ -144,9 +149,9 @@ make_plots_emojis <- function(
   clean_name_full <- full_model_spec
   clean_name_full <- gsub("\\[|\\]|:| ", "", clean_name_full)
   clean_name_full <- gsub(",", "+", clean_name_full)
-  clean_name_full <- gsub("Semantic_Score", "Meaning", clean_name_full)
-  clean_name_full <- gsub("Info_Score", "Info", clean_name_full)
-  clean_name_full <- gsub("Mean_Visual_Error", "VError", clean_name_full)
+  clean_name_full <- gsub("Semantic_Score", "Coherence", clean_name_full)
+  clean_name_full <- gsub("Info_Score", "Information Addition", clean_name_full)
+  clean_name_full <- gsub("Mean_Visual_Error", "Visual Clarity", clean_name_full)
 
   plot_single_elec(est_full, "Pz",
                    file = paste0(out_file, "_plots/Waveforms/Estimated_Pz_FullModel.pdf"),
@@ -157,13 +162,13 @@ make_plots_emojis <- function(
   # F. Estimated topoplots (full model)
   for (tw_est in time_windows) {
     plot_topo(est_full, file = paste0(out_file, "_plots/Topoplots/Estimated_FullModel"),
-              tw = tw_est, cond_man = "Cond_B", cond_base = "Cond_A",
+              tw = tw_est, cond_man = "B (bridged)", cond_base = "A (given)",
               add_title = paste("\nEstimate B-A", clean_name_full), omit_legend = TRUE,
-              subtitle = "Intercept + Meaning + Info + VError")
+              subtitle = "Intercept + Coherence + Information Addition + Visual Clarity")
     plot_topo(est_full, file = paste0(out_file, "_plots/Topoplots/Estimated_FullModel"),
-              tw = tw_est, cond_man = "Cond_C", cond_base = "Cond_A",
+              tw = tw_est, cond_man = "C (new)", cond_base = "A (given)",
               add_title = paste("\nEstimate C-A", clean_name_full), omit_legend = TRUE,
-              subtitle = "Intercept + Meaning + Info + VError")
+              subtitle = "Intercept + Coherence + Information Addition + Visual Clarity")
   }
 
   # G. Residuals + combined (estimated | residuals, side by side)
@@ -193,20 +198,20 @@ make_plots_emojis <- function(
                         "[:Intercept, :Info_Score]",
                         "[:Intercept, :Mean_Visual_Error]")
 
-  for (cond_focus in c("Cond_A", "Cond_B", "Cond_C")) {
+  for (cond_focus in c("A (given)", "B (bridged)", "C (new)")) {
     est_combined <- est[Spec %in% specs_to_overlay & Condition == cond_focus, ]
     est_combined$Spec <- gsub("\\[|\\]|:| ", "", est_combined$Spec)
     est_combined$Spec <- gsub("Intercept,", "", est_combined$Spec)
-    est_combined$Spec <- gsub("Semantic_Score", "Meaning", est_combined$Spec)
-    est_combined$Spec <- gsub("Info_Score", "Info", est_combined$Spec)
-    est_combined$Spec <- gsub("Mean_Visual_Error", "VError", est_combined$Spec)
-    est_combined$Spec <- factor(est_combined$Spec, levels = c("Meaning", "Info", "VError"))
+    est_combined$Spec <- gsub("Semantic_Score", "Coherence", est_combined$Spec)
+    est_combined$Spec <- gsub("Info_Score", "Information Addition", est_combined$Spec)
+    est_combined$Spec <- gsub("Mean_Visual_Error", "Visual Clarity", est_combined$Spec)
+    est_combined$Spec <- factor(est_combined$Spec, levels = c("Coherence", "Information Addition", "Visual Clarity"))
 
     for (e_focus in c("Fz", "Cz", "Pz")) {
       plot_single_elec(est_combined, e_focus,
                        file = paste0(out_file, "_plots/Waveforms/Fig13_Combined_Estimates_", e_focus, "_", cond_focus, ".pdf"),
                        modus = "Coefficient", ylims = c(12, -8), ci = TRUE,
-                       leg_labs = c("Semantics Only", "Information Only", "VError Only"),
+                       leg_labs = c("Coherence", "Information Addition", "Visual Clarity"),
                        leg_vals = c("#004488", "#BB5566", "#228833"),
                        title = paste("Isolated Predictor Estimates at", e_focus, "(", cond_focus, ")"))
     }

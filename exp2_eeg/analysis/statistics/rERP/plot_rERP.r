@@ -448,7 +448,7 @@ plot_topo <- function(
   
   clean_man <- gsub("Cond_", "", cond_man)
   clean_base <- gsub("Cond_", "", cond_base)
-  new_title <- paste0("Estimate ", clean_man, " - ", clean_base)
+  new_title <- paste0("Est. ", clean_man, " - ", clean_base)
   
   generate_topo(data_m_tw, file, tw, cond_man, cond_base,
                 amplim = 2.8, elec = electrodes,

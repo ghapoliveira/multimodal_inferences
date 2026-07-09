@@ -106,7 +106,7 @@ full_diagnosis_ph <- results_likert_ph %>%
 manual_ids <- c(6, 61, 2, 102, 19, 62, 149, 66) # Add the missing items (this table generates 112, and not 115, as explained in Chapter 3)
                                                 # This is necessary because it is targets_selected_ph that will feed the rERP
 
-corpus_ranked <- full_diagnosis_ph %>%
+corpus_ranked_ph <- full_diagnosis_ph %>%
   arrange(desc(Decision == "Valid"), desc(Information_Contrast_B_A)) %>%
   mutate(
     # Count only non-manual valid items sequentially
@@ -133,17 +133,17 @@ corpus_ranked <- full_diagnosis_ph %>%
   ) %>%
   select(Id, Status_Final, Rank_Valid, everything(), -Decision, -is_auto_valid, -Rank_Auto, -max_auto_rank)
 
-print(table(corpus_ranked$Status_Final))
+print(table(corpus_ranked_ph$Status_Final))
 
 # Save the full ordered corpus
-write.csv(corpus_ranked %>% rename(id = Id), "results/analysis_ph/corpus_ranked_ph.csv", row.names = FALSE)
+write.csv(corpus_ranked_ph %>% rename(id = Id), "results/analysis_ph/corpus_ranked_ph.csv", row.names = FALSE)
 
 # Create the final selected subset and save it separately
-targets_selected <- corpus_ranked %>%
+targets_selected_ph <- corpus_ranked_ph %>%
   filter(str_detect(Status_Final, "Selected")) %>%
   arrange(Rank_Valid)
 
-write.csv(targets_selected %>% rename(id = Id), "results/analysis_ph/targets_selected_ph.csv", row.names = FALSE)
+write.csv(targets_selected_ph %>% rename(id = Id), "results/analysis_ph/targets_selected_ph.csv", row.names = FALSE)
 
 # 5. Threshold sensitivity analysis
 
@@ -218,7 +218,7 @@ labs <- c("Visual clarity", "Coherence", "Information")
 dimnames(scale_cors_ph) <- list(labs, labs)
 
 print(round(scale_cors_ph, 3))
-saveRDS(scale_cors_ph, "results/analysis_ph/scale_cors.rds")
+saveRDS(scale_cors_ph, "results/analysis_ph/scale_cors_ph.rds")
 
 # 8. Plots
 
@@ -297,96 +297,53 @@ ggsave("results/analysis_ph/plot3_means_ph.png", plot = p3, width = 8, height = 
 # Use the full dataset
 results_likert_models <- results_likert_ph
 
-# 1. Create an ordered factor for CLMMs (Ordinal)
-# Assuming a 1-7 scale based on your plot labels
-results_likert_models$answer_likert_ord <- ordered(results_likert_models$answer_likert, 
-                                                   levels = 1:7)
-
-# 2. Create a numeric column for LMERs (Continuous)
+# 1. Ordered factor for CLMMs (ordinal)
+results_likert_models$answer_likert_ord <- ordered(results_likert_models$answer_likert,
+                                                    levels = 1:7)
+# 2. Numeric column for LMERs (continuous)
 results_likert_models$answer_likert_num <- as.numeric(as.character(results_likert_models$answer_likert))
 
-# Quick look at the data
-boxplot(answer_likert_num ~ Task + Cond, data = results_likert_models, 
-        main="Likert Scores by Task and Condition (Full Ensemble)")
 
+# 1: Ordinal models (CLMM) 
 
-# 1: Ordinal Models (CLMM)
-
-# Q. 1 (Likert 1 - Visual Error)
-results_models_perg1 <- results_likert_models %>%
-  filter(Task == "likert1") %>%
-  droplevels()
-
-mod_likert1 <- clmm(answer_likert_ord ~ Cond + (1|Id) + (1|Participant), data=results_models_perg1, Hess=TRUE)
-mod_zero1   <- clmm(answer_likert_ord ~ 1 + (1|Id) + (1|Participant), data=results_models_perg1, Hess=TRUE)
-
-anova(mod_zero1, mod_likert1)
+# Q1 (Likert 1 - Visual clarity)
+results_models_perg1 <- results_likert_models %>% filter(Task == "likert1") %>% droplevels()
+mod_likert1 <- clmm(answer_likert_ord ~ Cond + (1|Id) + (1|Participant), data = results_models_perg1, Hess = TRUE)
+mod_zero1   <- clmm(answer_likert_ord ~ 1    + (1|Id) + (1|Participant), data = results_models_perg1, Hess = TRUE)
 summary(mod_likert1)
-emmeans(mod_likert1, pairwise ~ Cond, adjust = "bonferroni")
 
-
-# Q. 2 (Likert 2 - Coherence)
-results_models_perg2 <- results_likert_models %>%
-  filter(Task == "likert2") %>%
-  droplevels()
-
-mod_likert2 <- clmm(answer_likert_ord ~ Cond + (1|Id) + (1|Participant), data=results_models_perg2, Hess=TRUE)
-mod_zero2   <- clmm(answer_likert_ord ~ 1 + (1|Id) + (1|Participant), data=results_models_perg2, Hess=TRUE)
-
-anova(mod_zero2, mod_likert2)
+# Q2 (Likert 2 - Coherence)
+results_models_perg2 <- results_likert_models %>% filter(Task == "likert2") %>% droplevels()
+mod_likert2 <- clmm(answer_likert_ord ~ Cond + (1|Id) + (1|Participant), data = results_models_perg2, Hess = TRUE)
+mod_zero2   <- clmm(answer_likert_ord ~ 1    + (1|Id) + (1|Participant), data = results_models_perg2, Hess = TRUE)
 summary(mod_likert2)
-emmeans(mod_likert2, pairwise ~ Cond, adjust = "bonferroni")
 
-
-# Q. 3 (Likert 3 - Information)
-results_models_perg3 <- results_likert_models %>%
-  filter(Task == "likert3") %>%
-  droplevels()
-
-mod_likert3 <- clmm(answer_likert_ord ~ Cond + (1|Id) + (1|Participant), data=results_models_perg3, Hess=TRUE)
-mod_zero3   <- clmm(answer_likert_ord ~ 1 + (1|Id) + (1|Participant), data=results_models_perg3, Hess=TRUE)
-
-anova(mod_zero3, mod_likert3)
+# Q3 (Likert 3 - Information)
+results_models_perg3 <- results_likert_models %>% filter(Task == "likert3") %>% droplevels()
+mod_likert3 <- clmm(answer_likert_ord ~ Cond + (1|Id) + (1|Participant), data = results_models_perg3, Hess = TRUE)
+mod_zero3   <- clmm(answer_likert_ord ~ 1    + (1|Id) + (1|Participant), data = results_models_perg3, Hess = TRUE)
 summary(mod_likert3)
-emmeans(mod_likert3, pairwise ~ Cond, adjust = "bonferroni")
 
 
-# 2: Continuous Models (LMER)
+# 2: Continuous models (LMER) 
 
-# Q. 1 (Numeric)
-mean_num_perg1 <- results_models_perg1 %>%
-  group_by(Cond) %>%
-  summarise(mean = mean(answer_likert_num, na.rm = TRUE))
+mean_num_perg1 <- results_models_perg1 %>% group_by(Cond) %>% summarise(mean = mean(answer_likert_num, na.rm = TRUE))
 print(mean_num_perg1)
-
 mod1_lmer <- lmer(answer_likert_num ~ Cond + (1|Id) + (1|Participant), data = results_models_perg1)
-summary(mod1_lmer)
-anova(mod1_lmer) # Main effect of Cond
-emmeans(mod1_lmer, pairwise ~ Cond, adjust = "bonferroni")
+anova(mod1_lmer)   # omnibus effect of Cond
 
-
-# Q. 2 (Numeric)
-mean_num_perg2 <- results_models_perg2 %>%
-  group_by(Cond) %>%
-  summarise(mean = mean(answer_likert_num, na.rm = TRUE))
+mean_num_perg2 <- results_models_perg2 %>% group_by(Cond) %>% summarise(mean = mean(answer_likert_num, na.rm = TRUE))
 print(mean_num_perg2)
-
 mod2_lmer <- lmer(answer_likert_num ~ Cond + (1|Id) + (1|Participant), data = results_models_perg2)
-summary(mod2_lmer)
 anova(mod2_lmer)
-emmeans(mod2_lmer, pairwise ~ Cond, adjust = "bonferroni")
 
-
-# Q. 3 (Numeric)
-mean_num_perg3 <- results_models_perg3 %>%
-  group_by(Cond) %>%
-  summarise(mean = mean(answer_likert_num, na.rm = TRUE))
+mean_num_perg3 <- results_models_perg3 %>% group_by(Cond) %>% summarise(mean = mean(answer_likert_num, na.rm = TRUE))
 print(mean_num_perg3)
-
 mod3_lmer <- lmer(answer_likert_num ~ Cond + (1|Id) + (1|Participant), data = results_models_perg3)
-summary(mod3_lmer)
 anova(mod3_lmer)
-emmeans(mod3_lmer, pairwise ~ Cond, adjust = "bonferroni")
+
+
+# Contrast tables 
 
 clmm_row <- function(m, m0, scale) {
   lr_stat <- as.numeric(2 * (logLik(m) - logLik(m0)))
@@ -401,10 +358,12 @@ clmm_row <- function(m, m0, scale) {
 }
 
 lmer_row <- function(m, scale) {
-  as.data.frame(emmeans(m, pairwise ~ Cond, adjust = "bonferroni")$contrasts) |>
+  as.data.frame(emmeans(m, pairwise ~ Cond, adjust = "bonferroni",
+                        lmer.df = "satterthwaite")$contrasts) |>
     transmute(Scale = scale, Contrast = contrast,
               Estimate = round(estimate, 2), SE = round(SE, 3),
-              z = round(z.ratio, 2), p = format.pval(p.value, eps = .0001))
+              df = round(df, 0),
+              t = round(t.ratio, 2), p = format.pval(p.value, eps = .0001))
 }
 
 clmm_table <- bind_rows(
