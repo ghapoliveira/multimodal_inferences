@@ -11,11 +11,13 @@ library(data.table)
 library(ggplot2)
 library(grid)
 library(gridExtra)
-library(extrafont)
+library(ggtext)
 
-loadfonts(device = "pdf")
-
+# Force ggplot2 to use Times New Roman
 theme_set(theme_get() + theme(text = element_text(family = "Times New Roman")))
+
+# Force base R graphics to use Times New Roman
+par(family = "Times New Roman")
 
 # 1: Coordinate preparation
 prepare_loc_from_ced <- function(input_file, output_file = "standard_30_clean.loc") {
@@ -46,7 +48,7 @@ make_plots_emojis <- function(
   dir.create(paste0(out_file, "_plots/Topoplots"), showWarnings = FALSE)
 
   clean_predictors <- c("Intercept", "Coherence", "Information Addition", "Visual Clarity")
-  model_labs <- c("Intercept", "Coherence", "Info", "V. Clarity")
+  model_labs <- c("Intercept", "Coherence", "Information Addition", "Visual Clarity")
   model_vals <- c("black", "#004488", "#BB5566", "#228833")
   time_windows <- list(c(250, 300), c(300, 500), c(500, 1000))
 
@@ -71,7 +73,7 @@ make_plots_emojis <- function(
                      file = paste0(out_file, "_plots/Waveforms/Fig12_Coefficients_", e_focus, ".pdf"),
                      modus = "Coefficient", ylims = c(12, -8), ci = TRUE,
                      leg_labs = model_labs, leg_vals = model_vals,
-                     title = paste("Regression Coefficients at", e_focus))
+                     title = "Regression Coefficients")
   }
 
   # B. Coefficient topoplots
@@ -102,20 +104,24 @@ make_plots_emojis <- function(
   tval$Condition <- factor(tval$Spec, levels = clean_predictors)
 
   plot_nine_elec(tval, elec_nine,
-                 file = paste0(out_file, "_plots/Waveforms/t-values_Grid.pdf"),
-                 title = "Inferential statistics (FDR-corrected T-values)",
-                 modus = "t-value", ylims = c(12, -8), tws = time_windows,
-                 ci = FALSE,
-                 leg_labs = model_labs[2:4], leg_vals = model_vals[2:4])
+               file = paste0(out_file, "_plots/Waveforms/t-values_Grid.pdf"),
+               title = expression(paste("Inferential statistics (FDR-corrected ", italic(t), "-values)")),
+               modus = "t-value", ylims = c(12, -8), tws = time_windows,
+               ci = FALSE,
+               leg_labs = model_labs[2:4], leg_vals = model_vals[2:4])
 
   # DATA SECTION  (WITHIN file: estimates, residuals, observed)
 
   eeg <- fread(paste0(desc_file, "_data.csv"))
+  
+  # Set dataframe conditions as plain text so the string-matching logic in plot_topo works
   eeg$Condition <- factor(eeg$Condition, levels = c(1, 2, 3),
-                          labels = c("A (given)", "B (bridged)", "C (new)"))
+                          labels = c("Given", "Bridged", "New"))
 
   obs <- eeg[Type == "EEG", ]
-  data_labs <- c("A (given)", "B (bridged)", "C (new)")
+  
+  # Set the plot labels to use mathematical italics
+  data_labs <- expression(italic("Given"), italic("Bridged"), italic("New"))
   data_vals <- c("black", "red", "blue")
 
   # D. Observed ERPs
@@ -132,12 +138,12 @@ make_plots_emojis <- function(
   for (tw_idx in time_windows) {
     tw_str <- paste0(tw_idx[1], "-", tw_idx[2])
     plot_topo(obs, file = paste0(out_file, "_plots/Topoplots/Observed"),
-              tw = tw_idx, cond_man = "B (bridged)", cond_base = "A (given)",
-              add_title = paste0("\nObserved B-A (", tw_str, " ms)"),
+              tw = tw_idx, cond_man = "Bridged", cond_base = "Given",
+              add_title = paste0("\nObserved Bridged – Given (", tw_str, " ms)"),
               subtitle = "Observed data")
     plot_topo(obs, file = paste0(out_file, "_plots/Topoplots/Observed"),
-              tw = tw_idx, cond_man = "C (new)", cond_base = "A (given)",
-              add_title = paste0("\nObserved C-A (", tw_str, " ms)"),
+              tw = tw_idx, cond_man = "New", cond_base = "Given",
+              add_title = paste0("\nObserved New – Given (", tw_str, " ms)"),
               subtitle = "Observed data")
   }
 
@@ -162,12 +168,12 @@ make_plots_emojis <- function(
   # F. Estimated topoplots (full model)
   for (tw_est in time_windows) {
     plot_topo(est_full, file = paste0(out_file, "_plots/Topoplots/Estimated_FullModel"),
-              tw = tw_est, cond_man = "B (bridged)", cond_base = "A (given)",
-              add_title = paste("\nEstimate B-A", clean_name_full), omit_legend = TRUE,
+              tw = tw_est, cond_man = "Bridged", cond_base = "Given",
+              add_title = paste("\nEstimate Bridged – Given", clean_name_full), omit_legend = TRUE,
               subtitle = "Intercept + Coherence + Information Addition + Visual Clarity")
     plot_topo(est_full, file = paste0(out_file, "_plots/Topoplots/Estimated_FullModel"),
-              tw = tw_est, cond_man = "C (new)", cond_base = "A (given)",
-              add_title = paste("\nEstimate C-A", clean_name_full), omit_legend = TRUE,
+              tw = tw_est, cond_man = "New", cond_base = "Given",
+              add_title = paste("\nEstimate New – Given", clean_name_full), omit_legend = TRUE,
               subtitle = "Intercept + Coherence + Information Addition + Visual Clarity")
   }
 
@@ -179,7 +185,7 @@ make_plots_emojis <- function(
                    file = paste0(out_file, "_plots/Waveforms/Residuals_Pz_FullModel.pdf"),
                    modus = "Condition", ylims = c(4, -4), ci = TRUE,
                    leg_labs = data_labs, leg_vals = data_vals,
-                   title = "Residuals (Observed - Estimated)",
+                   title = "Residuals (Observed – Estimated)",
                    omit_legend = TRUE, save_legend = FALSE)
 
   p_est <- plot_single_elec(est_full, "Pz", modus = "Condition",
@@ -198,7 +204,7 @@ make_plots_emojis <- function(
                         "[:Intercept, :Info_Score]",
                         "[:Intercept, :Mean_Visual_Error]")
 
-  for (cond_focus in c("A (given)", "B (bridged)", "C (new)")) {
+  for (cond_focus in c("Given", "Bridged", "New")) {
     est_combined <- est[Spec %in% specs_to_overlay & Condition == cond_focus, ]
     est_combined$Spec <- gsub("\\[|\\]|:| ", "", est_combined$Spec)
     est_combined$Spec <- gsub("Intercept,", "", est_combined$Spec)
@@ -213,7 +219,7 @@ make_plots_emojis <- function(
                        modus = "Coefficient", ylims = c(12, -8), ci = TRUE,
                        leg_labs = c("Coherence", "Information Addition", "Visual Clarity"),
                        leg_vals = c("#004488", "#BB5566", "#228833"),
-                       title = paste("Isolated Predictor Estimates at", e_focus, "(", cond_focus, ")"))
+                       title = bquote("Isolated Predictor Estimates (" * italic(.(cond_focus)) * ")"))
     }
   }
 

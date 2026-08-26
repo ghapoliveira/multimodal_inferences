@@ -19,6 +19,7 @@
 # - plot_grandavg_ci() CI ribbons use 1.96 × SE (95% CI), not raw SE
 # - plot_grandavg_ci() shades all time windows via a loop, not two hardcoded rects
 # - plot_full_elec() laid out for our 30-channel head montage, not the original 26/70
+# - other cosmetic changes (font size, font type...)
 
 
 library(data.table)
@@ -111,7 +112,10 @@ plot_grandavg_ci <- function(
                                                  linetype = "solid", color = "#A9A9A9"),
                  panel.grid.minor = element_line(linewidth  = 0.15,
                                                  linetype = "solid", color = "#A9A9A9"),
-                 legend.position = "top")
+                 legend.position = "top",
+                 axis.title.x = element_text(margin = margin(t = 8)),
+                 axis.title.y = element_text(margin = margin(r = 8)),
+                 plot.title = element_text(margin = margin(b = 6)))
   
   # Conditional modifications
   if (is.vector(ylims) == TRUE) {
@@ -143,12 +147,12 @@ plot_grandavg_ci <- function(
   } else if (modus == "Coefficient") {
     p <- p + labs(y = "Intercept + Coefficient", x = "Time (ms)",
                   title = ttl)
-    p <- p + scale_color_manual(name = modus,
+    p <- p + scale_color_manual(name = NULL,
                                 labels = leg_labs, values = leg_vals)
-    p <- p + scale_fill_manual(name = modus,
+    p <- p + scale_fill_manual(name = NULL,
                                labels = leg_labs, values = leg_vals)
   } else if (modus == "t-value") {
-    p <- p + labs(y = "T-value", x = "Time (ms)", title = ttl)
+    p <- p + labs(y = expression(italic(t) * "-value"), x = "Time (ms)", title = ttl)
     p <- p + scale_color_manual(name = "Predictor",
                                 labels = leg_labs, values = leg_vals)
     p <- p + scale_fill_manual(name = "Predictor",
@@ -156,8 +160,8 @@ plot_grandavg_ci <- function(
     p <- p + geom_point(data=sig_dt,
                         aes(x = Timestamp, y = posit, shape = sig), size = 2)
     p <- p + scale_shape_manual(values = c(32, 108),
-                                name = "Corrected p-values",
-                                labels = c("Nonsignificant", "Significant"))
+                            name = expression("Corrected " * italic(p) * "-values"),
+                            labels = c("Nonsignificant", "Significant"))
     for (i in 1:length(tws)) {
       p <- p + annotate("rect", 
                         xmin = tws[[i]][1], 
@@ -227,12 +231,21 @@ plot_single_elec <- function(
   
   # theme formatting
   gg <- plotlist[[1]]
-  gg <- gg + theme(legend.key.size = unit(0.5, 'cm'), 
-                   legend.key.height = unit(0.5, 'cm'), 
-                   legend.key.width = unit(0.5, 'cm'), 
-                   legend.title = element_text(size = 7), 
-                   legend.text = element_text(size = 5))
-  gg <- gg + theme(plot.title = element_text(size = 7.5))
+gg <- gg + theme(legend.key.size = unit(0.45, 'cm'), 
+                 legend.key.height = unit(0.45, 'cm'), 
+                 legend.key.width = unit(0.45, 'cm'), 
+                 legend.title = element_text(size = 8), 
+                 legend.text = element_text(size = 8),
+                 axis.title = element_text(size = 9),
+                 axis.text = element_text(size = 7))
+gg <- gg + guides(color = guide_legend(nrow = 2), fill = guide_legend(nrow = 2))
+gg <- gg + theme(plot.title = element_text(size = 9))
+
+full_title <- if (is.expression(title) || is.call(title)) {
+    bquote(.(e) * ": " * .(title))
+  } else {
+    paste0(e, ": ", title)
+  }
   
   if (omit_legend) {
     if (save_legend) {
@@ -243,12 +256,12 @@ plot_single_elec <- function(
              width = 3.5, height = 0.5)
     }
     gg <- gg + theme(legend.position = "none")
-    gg <- arrangeGrob(gg + ggtitle(paste0(e, ": ", title)),
+    gg <- arrangeGrob(gg + ggtitle(full_title),
                       heights = c(10, 0.25))
   } else {
     legend <- get_legend(gg)
     nl <- theme(legend.position = "none")
-    gg <- arrangeGrob(gg + nl + ggtitle(paste0(e, ": ", title)),
+    gg <- arrangeGrob(gg + nl + ggtitle(full_title),
                       legend, heights = c(10, 2))
   }
   
@@ -307,7 +320,10 @@ plot_nine_elec <- function(
   }
   legend <- get_legend(plotlist[[1]])
   nl <- theme(legend.position = "none")
-  gg <- arrangeGrob(arrangeGrob(
+  gg <- arrangeGrob(
+  textGrob(title, gp = gpar(fontfamily = "Times New Roman", fontsize = 14)),
+  nullGrob(),
+  arrangeGrob(
     plotlist[[1]] + nl + labs(x = ""),
     plotlist[[2]] + nl + labs(x = "", y = ""),
     plotlist[[3]] + nl + labs(x = "", y = ""),
@@ -317,9 +333,10 @@ plot_nine_elec <- function(
     plotlist[[7]] + nl,
     plotlist[[8]] + nl + labs(y = ""),
     plotlist[[9]] + nl + labs(y = ""),
-    layout_matrix = matrix(1:9, ncol = 3, byrow = TRUE)), legend,
-    nullGrob(),
-    heights = c(10, 2, 0.4), top = textGrob(title))
+    layout_matrix = matrix(1:9, ncol = 3, byrow = TRUE)),
+  legend,
+  nullGrob(),
+  heights = c(1, 0.3, 10, 2, 0.4))
   if (file != FALSE) {
     ggsave(file, gg, device = cairo_pdf, width = 7, height = 7)
   } else {
@@ -396,7 +413,7 @@ plot_full_elec <- function(
   }
   
   gg <- arrangeGrob(
-    textGrob(title, gp = gpar(fontsize = 22)),
+    textGrob(title, gp = gpar(fontsize = 22, fontfamily = "Times New Roman")),
     arrangeGrob(
     # row 1:  .   .    Fp1  .    Fp2  .    .
     no, no,            plotlist[[1]],  no,             plotlist[[2]],  no, no,
@@ -448,7 +465,7 @@ plot_topo <- function(
   
   clean_man <- gsub("Cond_", "", cond_man)
   clean_base <- gsub("Cond_", "", cond_base)
-  new_title <- paste0("Est. ", clean_man, " - ", clean_base)
+  new_title <- paste0("Est. ", clean_man, " – ", clean_base)
   
   generate_topo(data_m_tw, file, tw, cond_man, cond_base,
                 amplim = 2.8, elec = electrodes,
@@ -462,7 +479,7 @@ generate_topo <- function(
     subtitle = ""
 ) {
   data_agg <- data[, lapply(.SD, mean), by = list(Electrode, Condition), .SDcols = c("EEG")]
-  if (!grepl("t-values", file)) {
+  if (!grepl("t-value", file)) {
     data_diff <- compute_difference(data_agg, cond_man, cond_base, title)
   } else {
     data_diff <- data_agg[Condition == cond_man, c("Condition", "Electrode", "EEG")]
@@ -566,7 +583,7 @@ v4_interp <- function(df, xo, yo, rmax = .75, gridRes = 67) {
 }
 
 theme_topo <- function(base_size = 12) {
-  theme_bw(base_size = base_size) %+replace%
+  theme_bw(base_size = base_size, base_family = "Times New Roman") %+replace%
     theme(rect = element_blank(), line = element_blank(), axis.text = element_blank(), axis.title = element_blank())
 }
 
@@ -586,14 +603,17 @@ plot_density <- function(data, data_means, ylab, xlab, predictor, leg_labs, leg_
   p <- p + scale_fill_manual(labels = leg_labs, values = leg_vals)
   p <- p + scale_x_continuous(name = xlab, breaks = xbreaks)
   p <- p + labs(y = ylab)
-  p <- p + theme(legend.position = "bottom")
+  p <- p + theme(legend.position = "bottom",
+                 axis.title.x = element_text(margin = margin(t = 10)),
+                 legend.title = element_text(size = 11),
+                 legend.text = element_text(size = 10))
   p
 }
 
 plot_rSPR <- function(
     data, file, yunit, title, ylims = NULL, modus = "Condition", leg_labs, leg_vals
 ) {
-  if (modus == "t-value"){
+  if (modus == "t-values"){
     sig_dt <- data[, c("Region", "Spec", "sig")]
     sig_dt$posit <- rep(seq(ylims[1] + 2, ylims[1] + 4, length = length(unique(data$Spec))), length = nrow(sig_dt))
     sig_dt$sig <- factor(sig_dt$sig, levels = c(1, 0), labels = c("sign", "insign"))

@@ -1,10 +1,10 @@
 [Object0]
-Name=FixationCross
-WindowState=0
-Left=224
-Top=224
-Width=1114
-Height=598
-[Object1]
 Name=QuestionT
+WindowState=0
+Left=128
+Top=128
+Width=712
+Height=366
+[Object1]
+Name=FixationCross
 WindowState=2

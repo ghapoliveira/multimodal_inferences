@@ -19,6 +19,9 @@ library(ucminf)
 library(ordinal)
 library(emmeans)
 library(lmerTest)
+library(ggtext)
+library(systemfonts)
+library(ragg)
 
 # 1. Load anonymized data
 
@@ -229,9 +232,9 @@ p1 <- ggplot(results_likert_ph, aes(x = answer_likert, fill = Cond)) +
   scale_y_continuous(labels = scales::percent_format()) +
   labs(title = "Response distribution by condition and scale",
        x = "Likert (1–7)", y = "Proportion") +
-  theme_minimal()
+  theme_minimal(base_family = "Times New Roman")
 
-ggsave("results/analysis_ph/plot1_distributions_ph.png", plot = p1, width = 8, height = 6)
+ggsave("results/analysis_ph/plot1_distributions_ph.png", plot = p1, width = 8, height = 6, device = ragg::agg_png)
 
 # Plot 2: Consensus proportions
 p2 <- full_diagnosis_ph %>%
@@ -247,19 +250,21 @@ p2 <- full_diagnosis_ph %>%
   scale_fill_brewer(palette = "Set2") +
   scale_y_continuous(limits = c(0, 1), labels = scales::percent_format()) +
   scale_x_discrete(labels = c(
-    "Prop_Sens_A_OK"     = "A makes sense",
-    "Prop_Sens_B_OK"     = "B makes sense",
-    "Prop_Sens_C_Reject" = "C makes no sense",
-    "Prop_Info_B_OK"     = "B adds\ninformation",
-    "Prop_Info_A_Reject" = "A adds no\ninformation"
+    "Prop_Sens_A_OK"     = expression(atop(italic("Given"), "makes sense")),
+    "Prop_Sens_B_OK"     = expression(atop(italic("Bridged"), "makes sense")),
+    "Prop_Sens_C_Reject" = expression(atop(italic("New") ~ "makes", "no sense")),
+    "Prop_Info_B_OK"     = expression(atop(italic("Bridged"), "adds information")),
+    "Prop_Info_A_Reject" = expression(atop(italic("Given") ~ "adds", "no information"))
   )) +
   labs(title = "Consensus by criterion",
        y = "Consensus proportion", x = "") +
-  theme_minimal() +
-  theme(legend.position = "none",
-        axis.text.x = element_text(size = 10, face = "bold"))
+  theme_minimal(base_family = "Times New Roman") +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(size = 10)
+  )
 
-ggsave("results/analysis_ph/plot2_consensus_ph.png", plot = p2, width = 8, height = 6)
+ggsave("results/analysis_ph/plot2_consensus_ph.png", plot = p2, width = 8, height = 6, device = ragg::agg_png)
 
 # Plot 3: Mean scores by condition
 p3 <- full_diagnosis_ph %>%
@@ -280,17 +285,20 @@ p3 <- full_diagnosis_ph %>%
   )) +
   scale_y_continuous(breaks = 1:7, limits = c(1, 7)) +
   scale_x_discrete(labels = c(
-    "Mean_Info_A" = "Info A\n(Repetition)", "Mean_Info_B" = "Info B\n(Addition)",
-    "Mean_Sens_C" = "Sense C\n(Absurd)",    "Mean_Sens_A" = "Sense A\n(Coherent)",
-    "Mean_Sens_B" = "Sense B\n(Coherent)"
-  )) +
+  "Mean_Info_A" = expression(atop("Information", "(" * italic("given") * ")")),
+  "Mean_Info_B" = expression(atop("Information", "(" * italic("bridged") * ")")),
+  "Mean_Sens_C" = expression(atop("Coherence",   "(" * italic("new") * ")")),
+  "Mean_Sens_A" = expression(atop("Coherence",   "(" * italic("given") * ")")),
+  "Mean_Sens_B" = expression(atop("Coherence",   "(" * italic("bridged") * ")"))
+)) +
   labs(title = "Mean scores by condition",
        subtitle = "Contrast between conditions",
        y = "Mean score (1–7)", x = "") +
-  theme_minimal() +
-  theme(legend.position = "none")
+  theme_minimal(base_family = "Times New Roman") +
+  theme(legend.position = "none",
+        axis.text.x = element_text(size = 10))
 
-ggsave("results/analysis_ph/plot3_means_ph.png", plot = p3, width = 8, height = 6)
+ggsave("results/analysis_ph/plot3_means_ph.png", plot = p3, width = 8, height = 6, device = ragg::agg_png)
 
 # Statistical tests
 

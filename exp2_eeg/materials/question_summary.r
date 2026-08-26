@@ -1,5 +1,5 @@
 # question_summary.r
-# Generates a plot that summarizes questions and answers per condition, per list.
+# Generates a table that summarizes questions and answers per condition, per list.
 #
 # See requirements_R.txt
 
@@ -39,17 +39,11 @@ design_table <- questions %>%
     Total = n(),
     .groups = "drop"
   ) %>%
+  mutate(Total = if_else(cond == "FILLER", 90, Total)) %>%
   rename(Condition = cond)
 
 question_distribution <- bind_rows(
   design_table,
-  tibble(
-    Condition = "Fillers",
-    `List 1` = "30",
-    `List 2` = "30",
-    `List 3` = "30",
-    Total = 90
-  ),
   tibble(
     Condition = "Condition questions",
     `List 1` = "31",
