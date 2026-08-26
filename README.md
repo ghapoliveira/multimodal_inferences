@@ -1,6 +1,7 @@
-# Emojis and inferential processes: the neurophysiology of bridging in multimodal settings
+# Emoji and inferential processes: the neurophysiology of bridging in multimodal settings
+Zenodo — DOI: 10.5281/zenodo.22117891 
 
-Research compendium for a master's dissertation (Postgraduate Program in Linguistics, UFRJ) on **bridging inferences between text and emojis**. The project runs in two stages: a behavioral norming study that builds and screens the materials, and an EEG study that measures the neural response to the selected items.
+Research compendium for a Master's dissertation (Postgraduate Program in Linguistics, UFRJ) on **bridging inferences between text and emojis**. The project runs in two stages: a behavioral norming study that builds and screens the materials, and an EEG study that measures the neural response to the selected items.
 
 The procedures were duly approved by the Committee of Ethics in Research of the Federal University of Rio de Janeiro (CEP - UFRJ) and are registered under the Certificate of Presentation for Ethical Evaluation (CAAE) number 93482425.1.0000.5286. In compliance with the Committee's ethical recommendations, no participant received monetary compensation, but only complementary hours certificates (when requested).
 
