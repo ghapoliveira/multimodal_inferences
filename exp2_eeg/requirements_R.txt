@@ -2,6 +2,7 @@
 data.table==1.18.4
 dplyr==1.2.1
 ggplot2==4.0.3
+ggtext==0.1.2
 gridExtra==2.3
 readr==2.2.0
 readxl==1.4.5

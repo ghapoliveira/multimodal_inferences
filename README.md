@@ -13,7 +13,7 @@ of 150 sentence–emoji triads            cluster permutation test + rERP
         (PCIbex)                               (MNE, Julia, R)
 ```
 
-- **`exp1_norming/`** — a PCIbex norming study of 150 sentence–emoji triads (450 items). The selection, `results/analysis_ph/targets_selected_ph.csv`, is the bridge to Experiment 2. See [`exp1_norming/README.md`](exp1_norming/README.md).
+- **`exp1_norming/`** — a PCIbex norming study of 150 sentence–emoji triads (450 items). The selection, `results/analysis_ph/targets_selected_ph.csv`, is the bridge to Experiment 2. See [`exp1_norming/README.md`](exp1_norming/README.md). Throughout this repository, Conditions A, B and C correspond to the *given*, *bridged* and *new* conditions.
 
 - **`exp2_eeg/`** — the EEG study. The 120 selected targets are interleaved with 120 fillers and presented in E-Prime during EEG recording, then analyzed with a spatio-temporal cluster permutation test and a regression-ERP (rERP). See [`exp2_eeg/README.md`](exp2_eeg/README.md).
 

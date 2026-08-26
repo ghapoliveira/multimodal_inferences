@@ -5,6 +5,7 @@
 # These files were anonymized from the raw PCIBex output using anonymize_original.R (in data/anonymization_scripts/)
 # Participants gave informed consent; data were collected
 # in compliance with UFRJ ethics guidelines.
+# The plots rename the conditions to the more intuitive names for the Dissertation.
 # 
 # See requirements_R.txt.
 

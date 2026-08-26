@@ -1,5 +1,6 @@
 # density.R
-# Plots Density Scores for two of the predictors (Information and Meaning) — Chapter 4 (Dissertation) plots.
+# Plots Density Scores for two of the predictors (Information and Meaning) — Chapter 4 (Dissertation) plots 
+# (Also renames the conditions to the more intuitive names "given", "bridged", and "new").
 #
 # See requirements_R.txt
 
