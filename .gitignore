@@ -2,6 +2,8 @@
 #  Archived separately; empty skeleton kept via .gitkeep.
 #  exp1_norming/data/ is anonymized norming data and is committed (not ignored).
 
+articles
+.here
 exp2_eeg/data/**
 !exp2_eeg/data/
 !exp2_eeg/data/**/
